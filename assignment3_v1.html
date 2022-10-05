@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <title>Week3</title>
+    <link rel="stylesheet" type="text/css" href="week3.css"/>
+</head>
+<body>
+    <div class="frame">
+        <div class="logo">My Website</div>
+        <div class="menu">
+            <div class="item">Item 1</div>
+            <div class="item">Item 2</div>
+            <div class="item">Item 3</div>
+            <div class="item">Item 4</div>
+        </div>
+        <div class="mobile-menu">
+            <img src="menu.png" alt="mobile-menu" width="30" height="30"/>
+        </div>
+    </div>
+    <div class="banner">
+        <div >Welcome to MyHome</div>
+    </div>
+
+    <div class="container-top" id="container_top"></div>
+    <div class="container-bottom" id="container_bottom"></div>
+
+    <script>
+        //利用fetch進行連線並取得資料
+        fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json").then(function(response){
+                return response.json();
+            }).then(function(data){
+                let attraction=data["result"]["results"];
+
+                function getFirstFile(fileData){
+                    let fileList=fileData["file"].split("https");
+                    let firstFile="https"+fileList[1];
+                    return firstFile;
+                }
+            
+            //container top (只有前2個物件要印)
+            let container_top=document.querySelector("#container_top");
+            for(let i=0;i<2;i++){
+                //建立容器
+                let boxElement=document.createElement("div");
+                boxElement.className="top-box"; //建立CSS標籤
+
+                //照片
+                let boxImg=document.createElement("img");
+                boxImg.src=getFirstFile(attraction[i]); //取得照片
+                boxImg.className="top-box-img"
+                boxElement.appendChild(boxImg);
+
+                //景點名稱
+                let boxContent=document.createElement("div"); //創建放景點名稱的容器
+                boxContent.textContent=attraction[i]["stitle"]; //取得景點名稱
+                boxContent.className="top-box-content"; //建立CSS標籤
+                boxElement.appendChild(boxContent); //把景點名稱附加到boxElement
+        
+                //把box放進container_top
+                container_top.appendChild(boxElement);
+            }
+
+            //container bottom (印第3個～第8個物件）
+            let container_bottom=document.querySelector("#container_bottom");
+            for(let i=2;i<10;i++){
+                //建立容器
+                let boxElement=document.createElement("div");
+                boxElement.className="bottom-box"; //建立CSS標籤
+
+                //照片
+                let boxImg=document.createElement("img");
+                boxImg.src=getFirstFile(attraction[i]); //取得照片
+                boxImg.className="bottom-box-img"; //建立照片CSS標籤
+                boxElement.appendChild(boxImg);
+
+                //景點名稱
+                let boxContent=document.createElement("div");
+                boxContent.textContent=attraction[i]["stitle"]; //取得景點名稱
+                boxContent.className="bottom-box-content"; //建立CSS標籤
+                boxElement.appendChild(boxContent);
+
+                //把box放入container_bottom內
+                container_bottom.appendChild(boxElement);
+            }
+        })
+    </script>
+</body>
+</html>
