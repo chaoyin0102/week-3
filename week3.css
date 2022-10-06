@@ -135,6 +135,9 @@
     .mobile-menu{
         display:block;
     }
+    .banner{
+	font-size:25px;
+    }
     .container-top{
         flex-wrap:wrap;
         margin-bottom:0px;
