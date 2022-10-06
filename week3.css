@@ -82,19 +82,20 @@
     width:1200px;
     flex-wrap:wrap;
 }
-
 .bottom-box{
     margin-bottom:10px;
+    width:24.3%;
 }
-
-.bottom-box-img{
-    width:290px;
-    height:190px;
+.bottom-box img{
+    width:100%;
+    height:200px;
     vertical-align:top;
 }
-
+.bottom-box-img{
+    object-fit:cover;
+}
 .bottom-box-content{
-    width:290px;
+    width:100%;
     height:50px;
     line-height:50px;
     background-color:lightblue;
@@ -117,11 +118,6 @@
     }
     .bottom-box{
         width:49.5%;
-    }
-    .bottom-box-img{
-        width:100%;
-        height:100%;
-        object-fit:fill;
     }
     .bottom-box-content{
         width:auto;
